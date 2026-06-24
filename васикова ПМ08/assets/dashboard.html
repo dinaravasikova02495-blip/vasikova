@@ -1,57 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Личный кабинет • Пассажирам.РФ</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="page-dashboard">
-  <header class="header">
-    <div class="container header__inner">
-      <a class="logo" href="../index.html">
-        <img src="./img/logo2.svg" alt="Логотип" class="logo__img">
-        <span class="logo__text">Пассажирам.РФ</span>
-      </a>
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item"><a href="dashboard.html" class="nav__link nav__link--active">Кабинет</a></li>
-          <li class="nav__item"><a href="request.html" class="nav__link">Оформить заявку</a></li>
-          <li class="nav__item"><a href="#" id="logoutBtn" class="nav__link">Выйти</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container dashboard">
-    <h1>Личный кабинет</h1>
-    <p id="userGreeting" class="dashboard__greeting">Добро пожаловать!</p>
-
-    <section class="dashboard__section">
-      <h2>Мои заявки</h2>
-      <div id="userRequestsContainer" class="requests-list">
-        <p>Заявок пока нет.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <title>Личный кабинет • Пассажирам.РФ</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="page-dashboard">
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="../index.html"
+          ><img src="img/logo-placeholder.svg" alt="" class="logo__img" /><span
+            class="logo__text"
+            >Пассажирам.РФ</span
+          ></a
+        >
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="dashboard.html" class="nav__link nav__link--active"
+                >Кабинет</a
+              >
+            </li>
+            <li class="nav__item">
+              <a href="request.html" class="nav__link">Оформить заявку</a>
+            </li>
+            <li class="nav__item">
+              <a href="#" id="logoutBtn" class="nav__link">Выйти</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </section>
-
-    <section class="dashboard__section">
-      <h2>Оставить отзыв</h2>
-      <form id="feedbackForm" class="form form--feedback">
-        <div class="form__group">
-          <label for="feedbackText">Ваш отзыв</label>
-          <textarea id="feedbackText" rows="4" placeholder="Поделитесь впечатлениями о курсе..."></textarea>
+    </header>
+    <main class="container dashboard">
+      <h1>Личный кабинет</h1>
+      <p id="userGreeting" class="dashboard__greeting">Добро пожаловать!</p>
+      <section class="dashboard__section">
+        <h2>Мои заявки</h2>
+        <div id="userRequestsContainer" class="requests-list">
+          <p>Заявок пока нет.</p>
         </div>
-        <button type="submit" class="btn btn--primary">Отправить отзыв</button>
-        <div id="feedbackMessage" class="form__message"></div>
-      </form>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© 2026 Пассажирам.РФ</p>
-    </div>
-  </footer>
-  <script src="js/app.js"></script>
-</body>
+      </section>
+      <section class="dashboard__section" id="feedbackSection">
+        <h2>Оставить отзыв</h2>
+        <p id="feedbackLockMessage" class="form__message"></p>
+        <form
+          id="feedbackForm"
+          class="form form--feedback"
+          style="display: none"
+        >
+          <div class="form__group">
+            <label for="feedbackText">Ваш отзыв</label
+            ><textarea id="feedbackText" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--ripple">
+            Отправить отзыв
+          </button>
+          <div id="feedbackMessage" class="form__message"></div>
+        </form>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer__inner"><p>© 2026 Пассажирам.РФ</p></div>
+    </footer>
+    <script src="js/app.js"></script>
+  </body>
 </html>

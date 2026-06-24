@@ -1,29 +1,21 @@
-(function() {
-  // Единое хранилище в localStorage
+/* assets/js/app.js (полный) */
+(function () {
   const StorageKeys = {
-    USERS: 'portal_users',
-    CURRENT_USER: 'portal_current_user',
-    REQUESTS: 'portal_requests',
-    ADMIN_AUTH: 'admin_authenticated'
+    USERS: "portal_users",
+    CURRENT_USER: "portal_current_user",
+    REQUESTS: "portal_requests",
   };
-
-  // Инициализация тестового администратора, если нужно
-  if (!localStorage.getItem(StorageKeys.ADMIN_AUTH)) {
-    localStorage.setItem(StorageKeys.ADMIN_AUTH, JSON.stringify(false));
-  }
-
-  // Вспомогательные функции
   function getUsers() {
     return JSON.parse(localStorage.getItem(StorageKeys.USERS)) || [];
   }
-  function saveUsers(users) {
-    localStorage.setItem(StorageKeys.USERS, JSON.stringify(users));
+  function saveUsers(u) {
+    localStorage.setItem(StorageKeys.USERS, JSON.stringify(u));
   }
   function getCurrentUser() {
     return JSON.parse(localStorage.getItem(StorageKeys.CURRENT_USER));
   }
-  function setCurrentUser(user) {
-    localStorage.setItem(StorageKeys.CURRENT_USER, JSON.stringify(user));
+  function setCurrentUser(u) {
+    localStorage.setItem(StorageKeys.CURRENT_USER, JSON.stringify(u));
   }
   function clearCurrentUser() {
     localStorage.removeItem(StorageKeys.CURRENT_USER);
@@ -31,221 +23,294 @@
   function getRequests() {
     return JSON.parse(localStorage.getItem(StorageKeys.REQUESTS)) || [];
   }
-  function saveRequests(requests) {
-    localStorage.setItem(StorageKeys.REQUESTS, JSON.stringify(requests));
+  function saveRequests(r) {
+    localStorage.setItem(StorageKeys.REQUESTS, JSON.stringify(r));
   }
-
-  // Проверка авторизации и редирект
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add("toast--show");
+    setTimeout(() => t.classList.remove("toast--show"), 2200);
+  }
   function requireAuth() {
-    const user = getCurrentUser();
-    if (!user) {
-      window.location.href = 'login.html';
+    const u = getCurrentUser();
+    if (!u) {
+      window.location.href = "login.html";
       return null;
     }
-    return user;
+    return u;
+  }
+
+  // Слайдер
+  const sliderTrack = document.querySelector("[data-slider-track]");
+  if (sliderTrack) {
+    const slides = sliderTrack.children;
+    let idx = 0;
+    function move(i) {
+      idx = (i + slides.length) % slides.length;
+      sliderTrack.style.transform = `translateX(-${idx * 100}%)`;
+    }
+    document
+      .querySelector("[data-slider-prev]")
+      ?.addEventListener("click", () => {
+        move(idx - 1);
+        resetAuto();
+      });
+    document
+      .querySelector("[data-slider-next]")
+      ?.addEventListener("click", () => {
+        move(idx + 1);
+        resetAuto();
+      });
+    let auto = setInterval(() => move(idx + 1), 3000);
+    function resetAuto() {
+      clearInterval(auto);
+      auto = setInterval(() => move(idx + 1), 3000);
+    }
   }
 
   // Регистрация
-  const registerForm = document.getElementById('registerForm');
-  if (registerForm) {
-    registerForm.addEventListener('submit', function(e) {
+  const regForm = document.getElementById("registerForm");
+  if (regForm) {
+    regForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const login = document.getElementById('regLogin').value.trim();
-      const password = document.getElementById('regPassword').value;
-      const fullName = document.getElementById('fullName').value.trim();
-      const birthDate = document.getElementById('birthDate').value;
-      const phone = document.getElementById('phone').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const msg = document.getElementById('regMessage');
-
+      const login = document.getElementById("regLogin").value.trim();
+      const pass = document.getElementById("regPassword").value;
+      const name = document.getElementById("fullName").value.trim();
+      const birth = document.getElementById("birthDate").value;
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const hints = { regLogin: "", regPassword: "", fullName: "" };
+      let valid = true;
       if (!/^[a-zA-Z0-9]{6,}$/.test(login)) {
-        msg.textContent = 'Логин: латинские буквы/цифры, минимум 6 символов.';
-        msg.style.color = 'red';
-        return;
+        hints.regLogin = "Латинские буквы/цифры, минимум 6.";
+        valid = false;
       }
-      if (password.length < 8) {
-        msg.textContent = 'Пароль должен быть не менее 8 символов.';
-        msg.style.color = 'red';
-        return;
+      if (pass.length < 8) {
+        hints.regPassword = "Минимум 8 символов.";
+        valid = false;
       }
+      if (!name) {
+        hints.fullName = "Введите ФИО.";
+        valid = false;
+      }
+      Object.keys(hints).forEach((k) => {
+        const el = document.querySelector(`[data-hint="${k}"]`);
+        if (el) {
+          el.textContent = hints[k];
+          el.style.display = hints[k] ? "block" : "none";
+        }
+      });
+      if (!valid) return;
       const users = getUsers();
-      if (users.some(u => u.login === login)) {
-        msg.textContent = 'Логин уже занят. Выберите другой.';
-        msg.style.color = 'red';
+      if (users.some((u) => u.login === login)) {
+        document.getElementById("regMessage").textContent = "Логин занят.";
         return;
       }
-      users.push({ login, password, fullName, birthDate, phone, email });
+      users.push({
+        login,
+        password: pass,
+        fullName: name,
+        birthDate: birth,
+        phone,
+        email,
+      });
       saveUsers(users);
-      msg.textContent = 'Регистрация успешна! Перенаправление...';
-      msg.style.color = 'green';
-      setTimeout(() => { window.location.href = 'login.html'; }, 1200);
+      document.getElementById("regMessage").textContent =
+        "Успешно! Идёт вход...";
+      setTimeout(() => {
+        setCurrentUser({ login, fullName: name });
+        window.location.href = "dashboard.html";
+      }, 1000);
     });
   }
 
   // Вход
-  const loginForm = document.getElementById('loginForm');
+  const loginForm = document.getElementById("loginForm");
   if (loginForm) {
-    loginForm.addEventListener('submit', function(e) {
+    loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const login = document.getElementById('login').value.trim();
-      const password = document.getElementById('password').value;
-      const msg = document.getElementById('loginMessage');
-
-      const users = getUsers();
-      const user = users.find(u => u.login === login && u.password === password);
-      if (user) {
-        setCurrentUser({ login: user.login, fullName: user.fullName });
-        window.location.href = 'dashboard.html';
+      const login = document.getElementById("login").value.trim();
+      const pass = document.getElementById("password").value;
+      const u = getUsers().find(
+        (x) => x.login === login && x.password === pass,
+      );
+      if (u) {
+        setCurrentUser({ login: u.login, fullName: u.fullName });
+        window.location.href = "dashboard.html";
       } else {
-        msg.textContent = 'Неверный логин или пароль.';
-        msg.style.color = 'red';
+        document.getElementById("loginMessage").textContent =
+          "Неверный логин или пароль.";
+        document.getElementById("loginMessage").style.color = "red";
       }
     });
   }
 
-  // Выход пользователя
-  const logoutBtn = document.getElementById('logoutBtn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      clearCurrentUser();
-      window.location.href = 'login.html';
-    });
-  }
+  document.getElementById("logoutBtn")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    clearCurrentUser();
+    window.location.href = "login.html";
+  });
 
-  // Личный кабинет: приветствие и заявки
-  const userGreeting = document.getElementById('userGreeting');
-  if (userGreeting) {
+  // Личный кабинет
+  if (document.getElementById("userGreeting")) {
     const user = requireAuth();
-    if (user) {
-      userGreeting.textContent = `Добро пожаловать, ${user.fullName || user.login}!`;
-      renderUserRequests();
-    }
+    if (!user) return;
+    document.getElementById("userGreeting").textContent =
+      `Добро пожаловать, ${user.fullName || user.login}!`;
+    renderUserRequests();
   }
-
   function renderUserRequests() {
-    const container = document.getElementById('userRequestsContainer');
+    const container = document.getElementById("userRequestsContainer");
     if (!container) return;
     const user = getCurrentUser();
-    const allRequests = getRequests();
-    const userReqs = allRequests.filter(r => r.userLogin === user.login);
-    if (userReqs.length === 0) {
-      container.innerHTML = '<p>Заявок пока нет.</p>';
+    const reqs = getRequests().filter((r) => r.userLogin === user.login);
+    if (!reqs.length) {
+      container.innerHTML = "<p>Заявок пока нет.</p>";
+      toggleFeedback(false);
       return;
     }
-    container.innerHTML = userReqs.map(req => `
-      <div class="request-item">
-        <div><strong>${req.transport}</strong> с ${req.startDate}</div>
-        <div>Оплата: ${req.payment}</div>
-        <span class="status-badge status-${req.status.replace(/\s/g, '.')}">${req.status}</span>
-      </div>
-    `).join('');
+    container.innerHTML = reqs
+      .map(
+        (r) =>
+          `<div class="request-item"><div><strong>${r.transport}</strong> с ${r.startDate}</div><span class="status-badge status-${r.status.replace(/\s/g, ".")}">${r.status}</span></div>`,
+      )
+      .join("");
+    toggleFeedback(reqs.some((r) => r.status === "Обучение завершено"));
   }
-
-  // Отправка отзыва
-  const feedbackForm = document.getElementById('feedbackForm');
-  if (feedbackForm) {
-    feedbackForm.addEventListener('submit', function(e) {
+  function toggleFeedback(allow) {
+    const form = document.getElementById("feedbackForm");
+    const msg = document.getElementById("feedbackLockMessage");
+    if (allow) {
+      form.style.display = "block";
+      msg.textContent = "";
+    } else {
+      form.style.display = "none";
+      msg.textContent = "Отзыв доступен после завершения обучения.";
+    }
+  }
+  document
+    .getElementById("feedbackForm")
+    ?.addEventListener("submit", function (e) {
       e.preventDefault();
-      const text = document.getElementById('feedbackText').value.trim();
-      const msg = document.getElementById('feedbackMessage');
-      if (!text) {
-        msg.textContent = 'Введите текст отзыва.';
-        return;
-      }
-      msg.textContent = 'Спасибо за отзыв!';
-      msg.style.color = 'green';
-      feedbackForm.reset();
+      document.getElementById("feedbackMessage").textContent =
+        "Спасибо за отзыв!";
+      this.reset();
     });
-  }
 
-  // Оформление заявки
-  const requestForm = document.getElementById('requestForm');
-  if (requestForm) {
-    requestForm.addEventListener('submit', function(e) {
+  // Заявка (дата ДД.ММ.ГГГГ)
+  const reqForm = document.getElementById("requestForm");
+  if (reqForm) {
+    reqForm.addEventListener("submit", function (e) {
       e.preventDefault();
       const user = requireAuth();
       if (!user) return;
-      const transport = document.getElementById('transportType').value;
-      const startDate = document.getElementById('startDate').value;
-      const payment = document.getElementById('paymentMethod').value;
-      const msg = document.getElementById('requestMessage');
-      if (!transport || !startDate || !payment) {
-        msg.textContent = 'Заполните все поля.';
-        msg.style.color = 'red';
+      const transport = document.getElementById("transportType").value;
+      const dateRaw = document.getElementById("startDate").value.trim();
+      const payment = document.getElementById("paymentMethod").value;
+      const hintEl = document.querySelector('[data-hint="startDate"]');
+      if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dateRaw)) {
+        hintEl.textContent = "Формат ДД.ММ.ГГГГ";
+        hintEl.style.display = "block";
         return;
-      }
-      const requests = getRequests();
-      requests.push({
+      } else hintEl.style.display = "none";
+      const reqs = getRequests();
+      reqs.push({
         id: Date.now(),
         userLogin: user.login,
         transport,
-        startDate,
+        startDate: dateRaw,
         payment,
-        status: 'Новая'
+        status: "Новая",
       });
-      saveRequests(requests);
-      msg.textContent = 'Заявка отправлена!';
-      msg.style.color = 'green';
-      requestForm.reset();
+      saveRequests(reqs);
+      document.getElementById("requestMessage").textContent =
+        "Заявка отправлена!";
+      reqForm.reset();
+      toast("Заявка отправлена администратору");
     });
   }
 
-  // Администраторская панель (доступ по логину Admin26 / Demo20)
-  const adminContainer = document.getElementById('adminRequestsContainer');
-  if (adminContainer) {
-    if (!localStorage.getItem('admin_logged')) {
-      const login = prompt('Вход для администратора. Логин:');
-      const pass = prompt('Пароль:');
-      if (login === 'Admin26' && pass === 'Demo20') {
-        localStorage.setItem('admin_logged', '1');
-      } else {
-        alert('Неверные данные администратора.');
-        window.location.href = '../index.html';
-        return;
+  // Админка
+  if (document.getElementById("adminRequestsContainer")) {
+    if (!localStorage.getItem("admin_logged")) {
+      const l = prompt("Логин администратора:"),
+        p = prompt("Пароль:");
+      if (l === "Admin26" && p === "Demo20")
+        localStorage.setItem("admin_logged", "1");
+      else {
+        alert("Неверно");
+        window.location.href = "../index.html";
       }
     }
-    renderAdminPanel();
+    renderAdmin();
   }
+  document.getElementById("adminLogout")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("admin_logged");
+    window.location.href = "../index.html";
+  });
 
-  const adminLogout = document.getElementById('adminLogout');
-  if (adminLogout) {
-    adminLogout.addEventListener('click', function(e) {
-      e.preventDefault();
-      localStorage.removeItem('admin_logged');
-      window.location.href = '../index.html';
-    });
-  }
-
-  function renderAdminPanel() {
-    const container = document.getElementById('adminRequestsContainer');
+  let adminPage = 1,
+    adminPerPage = 4;
+  function renderAdmin() {
+    const container = document.getElementById("adminRequestsContainer");
+    const pagination = document.getElementById("adminPagination");
     if (!container) return;
-    const requests = getRequests();
-    if (requests.length === 0) {
-      container.innerHTML = '<p>Нет заявок.</p>';
-      return;
+    const search =
+      document.getElementById("adminSearch")?.value.toLowerCase() || "";
+    const sort = document.getElementById("adminSort")?.value;
+    let reqs = getRequests();
+    if (search)
+      reqs = reqs.filter(
+        (r) =>
+          r.userLogin.toLowerCase().includes(search) ||
+          r.transport.toLowerCase().includes(search),
+      );
+    reqs.sort((a, b) => (sort === "oldest" ? a.id - b.id : b.id - a.id));
+    const totalPages = Math.ceil(reqs.length / adminPerPage) || 1;
+    const start = (adminPage - 1) * adminPerPage;
+    const pageItems = reqs.slice(start, start + adminPerPage);
+    container.innerHTML = pageItems.length
+      ? pageItems
+          .map(
+            (r) => `<div class="request-item" data-id="${r.id}">
+      <div><strong>${r.userLogin}</strong> – ${r.transport} (${r.startDate})</div>
+      <select class="admin-select status-select"><option value="Новая" ${r.status === "Новая" ? "selected" : ""}>Новая</option><option value="Идет обучение" ${r.status === "Идет обучение" ? "selected" : ""}>Идет обучение</option><option value="Обучение завершено" ${r.status === "Обучение завершено" ? "selected" : ""}>Обучение завершено</option></select>
+    </div>`,
+          )
+          .join("")
+      : "<p>Нет заявок.</p>";
+    pagination.innerHTML = "";
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      if (i === adminPage) btn.classList.add("active");
+      btn.addEventListener("click", () => {
+        adminPage = i;
+        renderAdmin();
+      });
+      pagination.appendChild(btn);
     }
-    container.innerHTML = requests.map(req => `
-      <div class="request-item" data-id="${req.id}">
-        <div><strong>${req.userLogin}</strong> – ${req.transport} (${req.startDate})</div>
-        <div>Оплата: ${req.payment}</div>
-        <select class="admin-select status-select">
-          <option value="Новая" ${req.status === 'Новая' ? 'selected' : ''}>Новая</option>
-          <option value="Идет обучение" ${req.status === 'Идет обучение' ? 'selected' : ''}>Идет обучение</option>
-          <option value="Обучение завершено" ${req.status === 'Обучение завершено' ? 'selected' : ''}>Обучение завершено</option>
-        </select>
-      </div>
-    `).join('');
-
-    document.querySelectorAll('.status-select').forEach(select => {
-      select.addEventListener('change', function(e) {
-        const item = this.closest('.request-item');
-        const id = Number(item.dataset.id);
-        const newStatus = this.value;
-        const allRequests = getRequests();
-        const updated = allRequests.map(r => r.id === id ? { ...r, status: newStatus } : r);
-        saveRequests(updated);
+    document.querySelectorAll(".status-select").forEach((s) => {
+      s.addEventListener("change", function (e) {
+        const id = Number(this.closest(".request-item").dataset.id);
+        const all = getRequests().map((r) =>
+          r.id === id ? { ...r, status: this.value } : r,
+        );
+        saveRequests(all);
+        toast(`Статус изменён на «${this.value}»`);
+        renderAdmin();
       });
     });
   }
+  document.getElementById("adminSearch")?.addEventListener("input", () => {
+    adminPage = 1;
+    renderAdmin();
+  });
+  document.getElementById("adminSort")?.addEventListener("change", () => {
+    adminPage = 1;
+    renderAdmin();
+  });
 })();

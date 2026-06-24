@@ -1,43 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Вход • Пассажирам.РФ</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="page-auth">
-  <header class="header">
-    <div class="container header__inner">
-      <a class="logo" href="../index.html">
-        <img src="./img/logo2.svg" alt="Логотип" class="logo__img">
-        <span class="logo__text">Пассажирам.РФ</span>
-      </a>
-    </div>
-  </header>
-
-  <main class="auth-container">
-    <form id="loginForm" class="form" novalidate>
-      <h1>Вход в систему</h1>
-      <div class="form__group">
-        <label for="login">Логин</label>
-        <input type="text" id="login" name="login" placeholder="ivanov26" required>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <title>Вход • Пассажирам.РФ</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="page-auth">
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="../index.html"
+          ><img src="img/logo-placeholder.svg" alt="" class="logo__img" /><span
+            class="logo__text"
+            >Пассажирам.РФ</span
+          ></a
+        >
       </div>
-      <div class="form__group">
-        <label for="password">Пароль</label>
-        <input type="password" id="password" name="password" placeholder="••••••••" required>
-      </div>
-      <div id="loginMessage" class="form__message"></div>
-      <button type="submit" class="btn btn--primary btn--full">Войти</button>
-      <p class="form__switch">Еще не зарегистрированы? <a href="register.html">Регистрация</a></p>
-    </form>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© 2026 Пассажирам.РФ</p>
-    </div>
-  </footer>
-  <script src="js/app.js"></script>
-</body>
+    </header>
+    <main class="auth-container">
+      <form id="loginForm" class="form form--animated" novalidate>
+        <h1>Вход в систему</h1>
+        <div class="form__group">
+          <label for="login">Логин</label>
+          <input
+            type="text"
+            id="login"
+            name="login"
+            placeholder="ivanov26"
+            required
+          />
+          <span class="form__hint" data-hint="login"></span>
+        </div>
+        <div class="form__group">
+          <label for="password">Пароль</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+          <span class="form__hint" data-hint="password"></span>
+        </div>
+        <div id="loginMessage" class="form__message"></div>
+        <button type="submit" class="btn btn--primary btn--full btn--ripple">
+          Войти
+        </button>
+        <p class="form__switch">
+          Еще не зарегистрированы? <a href="register.html">Регистрация</a>
+        </p>
+      </form>
+    </main>
+    <footer class="footer">
+      <div class="container footer__inner"><p>© 2026 Пассажирам.РФ</p></div>
+    </footer>
+    <script src="js/app.js"></script>
+  </body>
 </html>

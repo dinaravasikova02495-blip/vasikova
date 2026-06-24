@@ -1,62 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Оформление заявки • Пассажирам.РФ</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="page-request">
-  <header class="header">
-    <div class="container header__inner">
-      <a class="logo" href="../index.html">
-        <img src="./img/logo2.svg" alt="Логотип" class="logo__img">
-        <span class="logo__text">Пассажирам.РФ</span>
-      </a>
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item"><a href="dashboard.html" class="nav__link">Кабинет</a></li>
-          <li class="nav__item"><a href="request.html" class="nav__link nav__link--active">Заявка</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <form id="requestForm" class="form form--request" novalidate>
-      <h1>Заявка на обучение</h1>
-      <div class="form__group">
-        <label for="transportType">Вид транспорта</label>
-        <select id="transportType" name="transport" required>
-          <option value="">-- выберите --</option>
-          <option value="Автобус">Автобус</option>
-          <option value="Электробус">Электробус</option>
-          <option value="Трамвай">Трамвай</option>
-        </select>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <title>Оформление заявки • Пассажирам.РФ</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="page-request">
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="../index.html"
+          ><img src="img/logo-placeholder.svg" alt="" class="logo__img" /><span
+            class="logo__text"
+            >Пассажирам.РФ</span
+          ></a
+        >
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="dashboard.html" class="nav__link">Кабинет</a>
+            </li>
+            <li class="nav__item">
+              <a href="request.html" class="nav__link nav__link--active"
+                >Заявка</a
+              >
+            </li>
+          </ul>
+        </nav>
       </div>
-      <div class="form__group">
-        <label for="startDate">Дата начала обучения</label>
-        <input type="date" id="startDate" name="startDate" required>
-      </div>
-      <div class="form__group">
-        <label for="paymentMethod">Способ оплаты</label>
-        <select id="paymentMethod" name="payment" required>
-          <option value="">-- выберите --</option>
-          <option value="Предоплата по QR-коду">Предоплата по QR-коду</option>
-          <option value="Оплата картой МИР">Оплата картой МИР</option>
-          <option value="Постоплата в офисе">Постоплата в офисе организации</option>
-        </select>
-      </div>
-      <div id="requestMessage" class="form__message"></div>
-      <button type="submit" class="btn btn--primary">Отправить заявку</button>
-    </form>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© 2026 Пассажирам.РФ</p>
-    </div>
-  </footer>
-  <script src="js/app.js"></script>
-</body>
+    </header>
+    <main class="container">
+      <form
+        id="requestForm"
+        class="form form--request form--animated"
+        novalidate
+      >
+        <h1>Заявка на обучение</h1>
+        <div class="form__group">
+          <label for="transportType">Вид транспорта</label
+          ><select id="transportType" required>
+            <option value="">-- выберите --</option>
+            <option value="Автобус">Автобус</option>
+            <option value="Электробус">Электробус</option>
+            <option value="Трамвай">Трамвай</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label for="startDate">Дата начала (ДД.ММ.ГГГГ)</label
+          ><input
+            type="text"
+            id="startDate"
+            placeholder="31.12.2026"
+            required
+          /><span class="form__hint" data-hint="startDate"></span>
+        </div>
+        <div class="form__group">
+          <label for="paymentMethod">Способ оплаты</label
+          ><select id="paymentMethod" required>
+            <option value="">-- выберите --</option>
+            <option value="Предоплата по QR-коду">Предоплата по QR-коду</option>
+            <option value="Оплата картой МИР">Оплата картой МИР</option>
+            <option value="Постоплата в офисе">
+              Постоплата в офисе организации
+            </option>
+          </select>
+        </div>
+        <div id="requestMessage" class="form__message"></div>
+        <button type="submit" class="btn btn--primary btn--ripple">
+          Отправить заявку
+        </button>
+      </form>
+    </main>
+    <footer class="footer">
+      <div class="container footer__inner"><p>© 2026 Пассажирам.РФ</p></div>
+    </footer>
+    <script src="js/app.js"></script>
+  </body>
 </html>

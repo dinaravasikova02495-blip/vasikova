@@ -1,61 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Регистрация • Пассажирам.РФ</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="page-auth">
-  <header class="header">
-    <div class="container header__inner">
-      <a class="logo" href="../index.html">
-        <img src="./img/logo2.svg" alt="Логотип" class="logo__img">
-        <span class="logo__text">Пассажирам.РФ</span>
-      </a>
-    </div>
-  </header>
-
-  <main class="auth-container">
-    <form id="registerForm" class="form" novalidate>
-      <h1>Регистрация</h1>
-      <div class="form__group">
-        <label for="regLogin">Логин</label>
-        <input type="text" id="regLogin" name="login" placeholder="латинские буквы и цифры, минимум 6" required>
-        <small>Латинские буквы и цифры, от 6 символов</small>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <title>Регистрация • Пассажирам.РФ</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="page-auth">
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="../index.html"
+          ><img src="img/logo-placeholder.svg" alt="" class="logo__img" /><span
+            class="logo__text"
+            >Пассажирам.РФ</span
+          ></a
+        >
       </div>
-      <div class="form__group">
-        <label for="regPassword">Пароль</label>
-        <input type="password" id="regPassword" name="password" placeholder="минимум 8 символов" required>
-        <small>Минимум 8 символов</small>
-      </div>
-      <div class="form__group">
-        <label for="fullName">ФИО</label>
-        <input type="text" id="fullName" name="fullName" placeholder="Иванов Иван Иванович" required>
-      </div>
-      <div class="form__group">
-        <label for="birthDate">Дата рождения</label>
-        <input type="date" id="birthDate" name="birthDate" required>
-      </div>
-      <div class="form__group">
-        <label for="phone">Контактный телефон</label>
-        <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00" required>
-      </div>
-      <div class="form__group">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="mail@example.com" required>
-      </div>
-      <div id="regMessage" class="form__message"></div>
-      <button type="submit" class="btn btn--primary btn--full">Зарегистрироваться</button>
-      <p class="form__switch">Уже есть аккаунт? <a href="login.html">Войти</a></p>
-    </form>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© 2026 Пассажирам.РФ</p>
-    </div>
-  </footer>
-  <script src="js/app.js"></script>
-</body>
+    </header>
+    <main class="auth-container">
+      <form id="registerForm" class="form form--animated" novalidate>
+        <h1>Регистрация</h1>
+        <div class="form__group">
+          <label for="regLogin">Логин</label
+          ><input
+            type="text"
+            id="regLogin"
+            placeholder="латинские буквы и цифры, мин. 6"
+            required
+          /><span class="form__hint" data-hint="regLogin"></span>
+        </div>
+        <div class="form__group">
+          <label for="regPassword">Пароль</label
+          ><input
+            type="password"
+            id="regPassword"
+            placeholder="минимум 8 символов"
+            required
+          /><span class="form__hint" data-hint="regPassword"></span>
+        </div>
+        <div class="form__group">
+          <label for="fullName">ФИО</label
+          ><input
+            type="text"
+            id="fullName"
+            placeholder="Иванов Иван Иванович"
+            required
+          /><span class="form__hint" data-hint="fullName"></span>
+        </div>
+        <div class="form__group">
+          <label for="birthDate">Дата рождения</label
+          ><input type="date" id="birthDate" required />
+        </div>
+        <div class="form__group">
+          <label for="phone">Телефон</label
+          ><input
+            type="tel"
+            id="phone"
+            placeholder="+7 900 000-00-00"
+            required
+          />
+        </div>
+        <div class="form__group">
+          <label for="email">E-mail</label
+          ><input
+            type="email"
+            id="email"
+            placeholder="mail@example.com"
+            required
+          />
+        </div>
+        <div id="regMessage" class="form__message"></div>
+        <button type="submit" class="btn btn--primary btn--full btn--ripple">
+          Зарегистрироваться
+        </button>
+        <p class="form__switch">
+          Уже есть аккаунт? <a href="login.html">Войти</a>
+        </p>
+      </form>
+    </main>
+    <footer class="footer">
+      <div class="container footer__inner"><p>© 2026 Пассажирам.РФ</p></div>
+    </footer>
+    <script src="js/app.js"></script>
+  </body>
 </html>

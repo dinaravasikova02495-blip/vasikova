@@ -1,38 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Панель администратора • Пассажирам.РФ</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="page-admin">
-  <header class="header">
-    <div class="container header__inner">
-      <a class="logo" href="../index.html">
-        <img src="./img/logo2.svg" alt="Логотип" class="logo__img">
-        <span class="logo__text">Пассажирам.РФ</span>
-      </a>
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item"><a href="#" id="adminLogout" class="nav__link">Выйти из админки</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container admin-panel">
-    <h1>Управление заявками (Администратор)</h1>
-    <div id="adminRequestsContainer" class="requests-list">
-      <p>Загрузка заявок...</p>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© 2026 Пассажирам.РФ</p>
-    </div>
-  </footer>
-  <script src="js/app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <title>Админ-панель • Пассажирам.РФ</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="page-admin">
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="../index.html"
+          ><img src="img/logo-placeholder.svg" alt="" class="logo__img" /><span
+            class="logo__text"
+            >Пассажирам.РФ</span
+          ></a
+        >
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#" id="adminLogout" class="nav__link">Выйти</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="container admin-panel">
+      <h1>Управление заявками</h1>
+      <div class="admin-controls">
+        <input
+          type="text"
+          id="adminSearch"
+          placeholder="Поиск по логину или транспорту"
+          class="admin-search"
+        />
+        <select id="adminSort" class="admin-select">
+          <option value="newest">Сначала новые</option>
+          <option value="oldest">Сначала старые</option>
+        </select>
+      </div>
+      <div id="adminRequestsContainer" class="requests-list"></div>
+      <div class="pagination" id="adminPagination"></div>
+    </main>
+    <div id="toast" class="toast"></div>
+    <footer class="footer">
+      <div class="container footer__inner"><p>© 2026 Пассажирам.РФ</p></div>
+    </footer>
+    <script src="js/app.js"></script>
+  </body>
 </html>
