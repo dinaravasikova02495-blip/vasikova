@@ -1,84 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Панель администратора — Пассажирам.РФ</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Панель администратора • Пассажирам.РФ</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Пассажирам.РФ</h1>
-            <p>Панель администратора</p>
-            <nav class="user-nav">
-                <span>Администратор: <strong>Admin26</strong></span>
-                <a href="../../index.html" class="btn btn-outline" id="adminLogout">Выйти</a>
-            </nav>
-        </header>
-
-        <main>
-            <section class="admin-panel">
-                <h2>Управление заявками</h2>
-
-                <!-- Фильтры и сортировка -->
-                <div class="admin-controls">
-                    <div class="filter-group">
-                        <label for="filterStatus">Фильтр по статусу:</label>
-                        <select id="filterStatus">
-                            <option value="all">Все</option>
-                            <option value="Новая">Новая</option>
-                            <option value="Идет обучение">Идет обучение</option>
-                            <option value="Обучение завершено">Обучение завершено</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="sortBy">Сортировка:</label>
-                        <select id="sortBy">
-                            <option value="date-asc">По дате (сначала новые)</option>
-                            <option value="date-desc">По дате (сначала старые)</option>
-                            <option value="status">По статусу</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Таблица заявок -->
-                <div class="table-wrapper">
-                    <table id="applicationsTable">
-                        <thead>
-                            <tr>
-                                <th>№</th>
-                                <th>Пользователь</th>
-                                <th>Транспорт</th>
-                                <th>Дата начала</th>
-                                <th>Оплата</th>
-                                <th>Статус</th>
-                                <th>Действие</th>
-                            </tr>
-                        </thead>
-                        <tbody id="applicationsBody">
-                            <!-- Заполняется JS -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Постраничная навигация -->
-                <div class="pagination" id="pagination">
-                    <button id="prevPage" disabled>«</button>
-                    <span id="pageInfo">Страница 1 из 1</span>
-                    <button id="nextPage" disabled>»</button>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>© 2026 Пассажирам.РФ</p>
-        </footer>
+<body class="page-admin">
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="../index.html">
+        <img src="assets/img/logo2.svg" alt="Логотип" class="logo__img">
+        <span class="logo__text">Пассажирам.РФ</span>
+      </a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#" id="adminLogout" class="nav__link">Выйти из админки</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <!-- Всплывающее уведомление -->
-    <div id="notification" class="notification" style="display: none;"></div>
+  <main class="container admin-panel">
+    <h1>Управление заявками (Администратор)</h1>
+    <div id="adminRequestsContainer" class="requests-list">
+      <p>Загрузка заявок...</p>
+    </div>
+  </main>
 
-    <script src="../js/main.js"></script>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Пассажирам.РФ</p>
+    </div>
+  </footer>
+  <script src="js/app.js"></script>
 </body>
 </html>

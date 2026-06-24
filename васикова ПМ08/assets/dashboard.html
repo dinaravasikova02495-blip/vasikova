@@ -1,72 +1,57 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет — Пассажирам.РФ</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Личный кабинет • Пассажирам.РФ</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Пассажирам.РФ</h1>
-            <p>Обучение перевозкам: автобус, электробус, трамвай</p>
-            <nav class="user-nav">
-                <span>Добро пожаловать, <strong id="userName">Пользователь</strong>!</span>
-                <a href="../../index.html" class="btn btn-outline" id="logoutBtn">Выйти</a>
-            </nav>
-        </header>
-
-        <main>
-            <!-- Слайдер -->
-            <section class="slider-section">
-                <h2>Наши курсы</h2>
-                <div class="slider-container">
-                    <button class="slider-btn prev" id="prevSlide">❮</button>
-                    <div class="slider-track" id="sliderTrack">
-                        <div class="slide"><img src="../img/slide1.jpg" alt="Автобус"></div>
-                        <div class="slide"><img src="../img/slide2.jpg" alt="Электробус"></div>
-                        <div class="slide"><img src="../img/slide3.jpg" alt="Трамвай"></div>
-                        <div class="slide"><img src="../img/slide4.jpg" alt="Обучение"></div>
-                    </div>
-                    <button class="slider-btn next" id="nextSlide">❯</button>
-                </div>
-                <div class="slider-dots" id="sliderDots"></div>
-            </section>
-
-            <!-- История заявок -->
-            <section class="applications-history">
-                <h2>Мои заявки</h2>
-                <div id="applicationsList">
-                    <p class="empty-msg">У вас пока нет заявок.</p>
-                </div>
-            </section>
-
-            <!-- Отзывы -->
-            <section class="reviews-section">
-                <h2>Оставить отзыв</h2>
-                <form id="reviewForm">
-                    <div class="form-group">
-                        <label for="reviewSelect">Выберите заявку со статусом "Обучение завершено"</label>
-                        <select id="reviewSelect" required>
-                            <option value="">— выберите —</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="reviewText">Ваш отзыв</label>
-                        <textarea id="reviewText" rows="3" placeholder="Напишите отзыв о курсе..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Отправить отзыв</button>
-                </form>
-                <div id="reviewMessage" class="success-message" style="display: none;">Спасибо за ваш отзыв!</div>
-            </section>
-        </main>
-
-        <footer>
-            <p>© 2026 Пассажирам.РФ</p>
-        </footer>
+<body class="page-dashboard">
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="../index.html">
+        <img src="assets/img/logo2.svg" alt="Логотип" class="logo__img">
+        <span class="logo__text">Пассажирам.РФ</span>
+      </a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="dashboard.html" class="nav__link nav__link--active">Кабинет</a></li>
+          <li class="nav__item"><a href="request.html" class="nav__link">Оформить заявку</a></li>
+          <li class="nav__item"><a href="#" id="logoutBtn" class="nav__link">Выйти</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <script src="../js/main.js"></script>
+  <main class="container dashboard">
+    <h1>Личный кабинет</h1>
+    <p id="userGreeting" class="dashboard__greeting">Добро пожаловать!</p>
+
+    <section class="dashboard__section">
+      <h2>Мои заявки</h2>
+      <div id="userRequestsContainer" class="requests-list">
+        <p>Заявок пока нет.</p>
+      </div>
+    </section>
+
+    <section class="dashboard__section">
+      <h2>Оставить отзыв</h2>
+      <form id="feedbackForm" class="form form--feedback">
+        <div class="form__group">
+          <label for="feedbackText">Ваш отзыв</label>
+          <textarea id="feedbackText" rows="4" placeholder="Поделитесь впечатлениями о курсе..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary">Отправить отзыв</button>
+        <div id="feedbackMessage" class="form__message"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Пассажирам.РФ</p>
+    </div>
+  </footer>
+  <script src="js/app.js"></script>
 </body>
 </html>

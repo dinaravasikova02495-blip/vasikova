@@ -1,42 +1,88 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход — Пассажирам.РФ</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Пассажирам.РФ • Обучение перевозкам</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Пассажирам.РФ</h1>
-            <p>Обучение перевозкам: автобус, электробус, трамвай</p>
-        </header>
-
-        <main>
-            <section class="auth-form">
-                <h2>Вход в систему</h2>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="login">Логин</label>
-                        <input type="text" id="login" placeholder="Введите логин" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Пароль</label>
-                        <input type="password" id="password" placeholder="Введите пароль" required>
-                    </div>
-                    <div id="loginError" class="error-message" style="display: none;">Неверный логин или пароль</div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                </form>
-                <p class="auth-switch">Ещё не зарегистрированы? <a href="assets/pages/register.html">Регистрация</a></p>
-            </section>
-        </main>
-
-        <footer>
-            <p>© 2026 Пассажирам.РФ</p>
-        </footer>
+<body class="page-index">
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <img src="assets/img/logo2.svg" alt="Логотип" class="logo__img">
+        <span class="logo__text">Пассажирам.РФ</span>
+      </a>
+      <nav class="nav" aria-label="Основная навигация">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link nav__link--active">Главная</a></li>
+          <li class="nav__item"><a href="assets/login.html" class="nav__link">Вход</a></li>
+          <li class="nav__item"><a href="assets/register.html" class="nav__link">Регистрация</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <script src="assets/js/main.js"></script>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Обучение пассажирским перевозкам</h1>
+        <p class="hero__subtitle">Автобус, электробус, трамвай — станьте водителем городского транспорта с надёжной подготовкой.</p>
+        <div class="hero__actions">
+          <a href="assets/register.html" class="btn btn--primary">Записаться на курс</a>
+          <a href="assets/login.html" class="btn btn--outline">Войти в кабинет</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="directions container">
+      <h2>Направления обучения</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card__icon"><img src="assets/img/avtobus.jpg" alt=""></div>
+          <h3>Автобус</h3>
+          <p>Классический городской маршрут. Уверенное вождение и обслуживание пассажиров.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon"><img src="assets/img/electrobus.jpg" alt=""></div>
+          <h3>Электробус</h3>
+          <p>Современный экологичный транспорт. Особенности зарядки и плавного хода.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon"><img src="assets/img/tramvai.jpg" alt=""></div>
+          <h3>Трамвай</h3>
+          <p>Рельсовый транспорт. Точное соблюдение расписания и путевая безопасность.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="payment-info container">
+      <h2>Способы оплаты</h2>
+      <ul class="payment-list">
+        <li><strong>Предоплата по QR-коду</strong> — мгновенное зачисление</li>
+        <li><strong>Оплата картой МИР</strong> — безопасный платёж онлайн</li>
+        <li><strong>Постоплата в офисе организации</strong> — оплата после старта занятий</li>
+      </ul>
+    </section>
+
+    <section class="contacts container">
+      <h2>Наше местонахождение</h2>
+      <p><strong>Адрес головного офиса:</strong> г. Москва, ул. Большая Ордынка, д. 15</p>
+      <p><strong>Телефон горячей линии:</strong> +7 (495) 123-45-67</p>
+      <p class="contacts__note">Если возникли вопросы или пожелания, позвоните нам. Ответим оперативно и подробно.</p>
+      <div class="social">
+        <span>Мы в соцсетях:</span>
+        <a href="#" class="social__link" aria-label="ВКонтакте"><img src="assets/img/vk.png" alt=""> ВКонтакте</a>
+        <a href="#" class="social__link" aria-label="Одноклассники"><img src="assets/img/odn.png" alt=""> Одноклассники</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</p>
+    </div>
+  </footer>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
