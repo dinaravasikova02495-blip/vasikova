@@ -88,35 +88,57 @@ a:hover {
   border-radius: 6px;
   font-weight: 700;
   font-size: 16px;
-  border: 2px solid transparent;
+  border: none;
   cursor: pointer;
   text-align: center;
-  transition: 0.2s;
+  transition: 0.3s ease;
   position: relative;
   overflow: hidden;
 }
+
+/* Основная кнопка с градиентом */
 .btn--primary {
-  background: #007bff;
-  color: #fff;
-  border-color: #007bff;
+  background: linear-gradient(135deg, #007bff 0%, #0d47a1 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 .btn--primary:hover {
-  background: #0d47a1;
+  background: linear-gradient(135deg, #0d47a1 0%, #007bff 100%);
+  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.4);
+  transform: translateY(-2px);
 }
+.btn--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+}
+
+/* Контурная кнопка с градиентной рамкой */
 .btn--outline {
-  background: transparent;
+  background: #ffffff;
   color: #007bff;
-  border-color: #007bff;
+  border: 2px solid #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
 }
 .btn--outline:hover {
-  background: #007bff;
-  color: #fff;
+  background: linear-gradient(135deg, #007bff 0%, #0d47a1 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.4);
+  transform: translateY(-2px);
 }
+.btn--outline:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+/* Широкая кнопка */
 .btn--full {
   width: 100%;
 }
+
+/* Ripple-эффект */
 .btn--ripple::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -125,9 +147,7 @@ a:hover {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.4);
   transform: translate(-50%, -50%);
-  transition:
-    width 0.6s,
-    height 0.6s;
+  transition: width 0.6s, height 0.6s;
 }
 .btn--ripple:active::after {
   width: 300px;
@@ -329,6 +349,7 @@ a:hover {
 .dashboard__greeting {
   font-size: 20px;
   margin-bottom: 30px;
+  padding-left: 10px;
 }
 .dashboard__section {
   background: #ffffff;
@@ -438,6 +459,7 @@ a:hover {
 @media (max-width: 600px) {
   h1 {
     font-size: 28px;
+    text-align: center;
   }
   .header__inner {
     flex-direction: column;
