@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — Пассажирам.РФ</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Пассажирам.РФ</h1>
+            <p>Обучение перевозкам: автобус, электробус, трамвай</p>
+        </header>
+
+        <main>
+            <section class="auth-form">
+                <h2>Регистрация</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="regLogin">Логин (мин. 6 символов, латиница и цифры)</label>
+                        <input type="text" id="regLogin" placeholder="Введите логин" required>
+                        <span id="loginError" class="field-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Пароль (мин. 8 символов)</label>
+                        <input type="password" id="regPassword" placeholder="Введите пароль" required>
+                        <span id="passwordError" class="field-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullName">ФИО</label>
+                        <input type="text" id="fullName" placeholder="Иванов Иван Иванович" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate">Дата рождения</label>
+                        <input type="date" id="birthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Контактный телефон</label>
+                        <input type="tel" id="phone" placeholder="+7 (999) 999-99-99" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="example@mail.ru" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                </form>
+                <p class="auth-switch">Уже есть аккаунт? <a href="../../index.html">Войти</a></p>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Пассажирам.РФ</p>
+        </footer>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

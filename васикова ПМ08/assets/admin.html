@@ -2,74 +2,83 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Пассажирам.РФ — Админ-панель</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора — Пассажирам.РФ</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="img/logo.svg" alt="Пассажирам.РФ" class="logo-img">
-                <span class="logo-text">Пассажирам.РФ</span>
-            </div>
-            <nav class="nav">
-                <a href="admin.html" class="nav-link active">Админ-панель</a>
-                <a href="../index.html" class="nav-link" id="adminLogout">Выйти</a>
+    <div class="container">
+        <header>
+            <h1>Пассажирам.РФ</h1>
+            <p>Панель администратора</p>
+            <nav class="user-nav">
+                <span>Администратор: <strong>Admin26</strong></span>
+                <a href="../../index.html" class="btn btn-outline" id="adminLogout">Выйти</a>
             </nav>
-        </div>
-    </header>
+        </header>
 
-    <main class="main">
-        <div class="container">
+        <main>
             <section class="admin-panel">
-                <h1>Панель управления</h1>
+                <h2>Управление заявками</h2>
+
+                <!-- Фильтры и сортировка -->
                 <div class="admin-controls">
-                    <input type="text" id="filterStatus" placeholder="Фильтр по статусу (Новая, Идет обучение, Обучение завершено)">
-                    <button class="btn btn-secondary" id="applyFilter">Применить</button>
-                    <button class="btn btn-secondary" id="resetFilter">Сбросить</button>
+                    <div class="filter-group">
+                        <label for="filterStatus">Фильтр по статусу:</label>
+                        <select id="filterStatus">
+                            <option value="all">Все</option>
+                            <option value="Новая">Новая</option>
+                            <option value="Идет обучение">Идет обучение</option>
+                            <option value="Обучение завершено">Обучение завершено</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sortBy">Сортировка:</label>
+                        <select id="sortBy">
+                            <option value="date-asc">По дате (сначала новые)</option>
+                            <option value="date-desc">По дате (сначала старые)</option>
+                            <option value="status">По статусу</option>
+                        </select>
+                    </div>
                 </div>
-                <div id="adminTableContainer">
-                    <table class="admin-table">
+
+                <!-- Таблица заявок -->
+                <div class="table-wrapper">
+                    <table id="applicationsTable">
                         <thead>
                             <tr>
-                                <th data-sort="id">ID</th>
-                                <th data-sort="userLogin">Пользователь</th>
-                                <th data-sort="transport">Транспорт</th>
-                                <th data-sort="date">Дата</th>
-                                <th data-sort="status">Статус</th>
+                                <th>№</th>
+                                <th>Пользователь</th>
+                                <th>Транспорт</th>
+                                <th>Дата начала</th>
+                                <th>Оплата</th>
+                                <th>Статус</th>
                                 <th>Действие</th>
                             </tr>
                         </thead>
-                        <tbody id="adminTableBody">
-                            <!-- динамически из JS -->
+                        <tbody id="applicationsBody">
+                            <!-- Заполняется JS -->
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Постраничная навигация -->
                 <div class="pagination" id="pagination">
-                    <button class="page-btn" data-page="prev">◀</button>
-                    <span id="pageInfo">1 / 1</span>
-                    <button class="page-btn" data-page="next">▶</button>
+                    <button id="prevPage" disabled>«</button>
+                    <span id="pageInfo">Страница 1 из 1</span>
+                    <button id="nextPage" disabled>»</button>
                 </div>
-                <div id="adminNotification" class="admin-notification"></div>
             </section>
-        </div>
-    </main>
+        </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-contacts">
-                <p>📍 г. Москва, ул. Большая Ордынка, д. 15</p>
-                <p>📞 +7 (495) 123-45-67</p>
-            </div>
-            <div class="footer-payment">
-                <span>Оплата: </span>
-                <span>QR-код, карта МИР, постоплата в офисе</span>
-            </div>
-        </div>
-    </footer>
+        <footer>
+            <p>© 2026 Пассажирам.РФ</p>
+        </footer>
+    </div>
 
-    <script src="js/main.js"></script>
+    <!-- Всплывающее уведомление -->
+    <div id="notification" class="notification" style="display: none;"></div>
+
+    <script src="../js/main.js"></script>
 </body>
 </html>
