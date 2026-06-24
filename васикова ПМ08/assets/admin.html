@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Пассажирам.РФ — Админ-панель</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.svg" alt="Пассажирам.РФ" class="logo-img">
+                <span class="logo-text">Пассажирам.РФ</span>
+            </div>
+            <nav class="nav">
+                <a href="admin.html" class="nav-link active">Админ-панель</a>
+                <a href="../index.html" class="nav-link" id="adminLogout">Выйти</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="admin-panel">
+                <h1>Панель управления</h1>
+                <div class="admin-controls">
+                    <input type="text" id="filterStatus" placeholder="Фильтр по статусу (Новая, Идет обучение, Обучение завершено)">
+                    <button class="btn btn-secondary" id="applyFilter">Применить</button>
+                    <button class="btn btn-secondary" id="resetFilter">Сбросить</button>
+                </div>
+                <div id="adminTableContainer">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th data-sort="id">ID</th>
+                                <th data-sort="userLogin">Пользователь</th>
+                                <th data-sort="transport">Транспорт</th>
+                                <th data-sort="date">Дата</th>
+                                <th data-sort="status">Статус</th>
+                                <th>Действие</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <!-- динамически из JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="pagination">
+                    <button class="page-btn" data-page="prev">◀</button>
+                    <span id="pageInfo">1 / 1</span>
+                    <button class="page-btn" data-page="next">▶</button>
+                </div>
+                <div id="adminNotification" class="admin-notification"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-contacts">
+                <p>📍 г. Москва, ул. Большая Ордынка, д. 15</p>
+                <p>📞 +7 (495) 123-45-67</p>
+            </div>
+            <div class="footer-payment">
+                <span>Оплата: </span>
+                <span>QR-код, карта МИР, постоплата в офисе</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

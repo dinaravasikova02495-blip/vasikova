@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Пассажирам.РФ — Личный кабинет</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.svg" alt="Пассажирам.РФ" class="logo-img">
+                <span class="logo-text">Пассажирам.РФ</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html" class="nav-link active">Личный кабинет</a>
+                <a href="application.html" class="nav-link">Новая заявка</a>
+                <a href="../index.html" class="nav-link" id="logoutBtn">Выйти</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="dashboard">
+                <h1>Личный кабинет</h1>
+                <!-- Слайдер с 6 изображениями -->
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slides">
+                            <div class="slide"><img src="img/slide1.jpg" alt="Обучение вождению"></div>
+                            <div class="slide"><img src="img/slide2.jpg" alt="Автобусы"></div>
+                            <div class="slide"><img src="img/slide3.jpg" alt="Электробусы"></div>
+                            <div class="slide"><img src="img/slide4.jpg" alt="Трамваи"></div>
+                            <div class="slide"><img src="img/slide5.jpg" alt="Занятия в классе"></div>
+                            <div class="slide"><img src="img/slide6.jpg" alt="Практическое вождение"></div>
+                        </div>
+                        <button class="slider-btn prev">❮</button>
+                        <button class="slider-btn next">❯</button>
+                    </div>
+                </div>
+
+                <h2>Мои заявки</h2>
+                <div id="applicationsList" class="applications-list">
+                    <!-- динамически из JS -->
+                </div>
+
+                <h2>Оставить отзыв</h2>
+                <form id="reviewForm" class="form">
+                    <div class="form-group">
+                        <label for="reviewText">Ваш отзыв (доступно только для заявок со статусом "Обучение завершено")</label>
+                        <textarea id="reviewText" rows="3" placeholder="Напишите отзыв..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Отправить отзыв</button>
+                </form>
+                <div id="reviewStatus" class="review-status"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-contacts">
+                <p>📍 г. Москва, ул. Большая Ордынка, д. 15</p>
+                <p>📞 +7 (495) 123-45-67</p>
+            </div>
+            <div class="footer-payment">
+                <span>Оплата: </span>
+                <span>QR-код, карта МИР, постоплата в офисе</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
